@@ -19,7 +19,7 @@ button, #display {
     font-family: 'Courier New', Courier, monospace;
     font-weight: 900;
 }
-button.doubleButton {
+button.double-button {
     grid-column: 1 / 3;
 }
 button.operator {
@@ -42,7 +42,7 @@ button.percentage {
     border-radius: 4px;
 }
 
-#numberPanel {
+#number-panel {
     background-color: antiquewhite;
     width: 280px;
     height: 76%;
