@@ -8,17 +8,22 @@ let isNum1Complete = false;
 let isRestart = false;
 
 const numberPanel = document.getElementById("number-panel");
+window.addEventListener("keydown", buttonListener);
+numberPanel.focus() // so it captures keydown event
 numberPanel.addEventListener("click", buttonListener);
 
 function buttonListener(e) {
-    const isButton = e.target.nodeName === "BUTTON";
+    const isButton = e.target.nodeName === "BUTTON" || e.target.nodeName === "BODY";
     let buttonValue = e.target.value;
+    if (e.type == "keydown") {
+        buttonValue = e.key;
+    }
 
     if (!isButton) {    // the listener is triggered by the div
         return;
     }
     
-    if (buttonValue === 'C') {
+    if (buttonValue === 'C' || buttonValue == 'c') {
         clear();
         return;
     }
@@ -85,7 +90,8 @@ function buttonListener(e) {
             print(num1)
             return
         }
-    } else { // symbols + - x / = % .
+    } else if (buttonValue == '+' || buttonValue == '-' || buttonValue == '*' ||
+        buttonValue == "x" || buttonValue == '/' || buttonValue == '=') {
         document.getElementById("decimal-btn").disabled = false;
         if (buttonValue === "=") {
             if (num2 == "") {
@@ -116,6 +122,7 @@ function operate(operator, a, b) {
         case '-':
             return subtract(Number(a), Number(b));
         case 'x':
+        case '*':
             return multiply(Number(a), Number(b));
         case '/':
             return divide(Number(a), Number(b));
