@@ -111,17 +111,17 @@ function restartOperation(solution) {
 // BASIC MATH FUNCTIONS
 // -----------------------------------------------------------------------------
 function add(a, b) {
-    const solution = a + b;
+    const solution = roundToSixDecimals(a + b);
     restartOperation(solution);
     return solution;
 }
 function subtract(a, b) {
-    const solution = a - b;
+    const solution = roundToSixDecimals(a - b);
     restartOperation(solution);
     return solution;
 }
 function multiply(a, b) {
-    const solution = a * b;
+    const solution = roundToSixDecimals(a * b);
     restartOperation(solution);
     return solution;
 }
@@ -130,7 +130,7 @@ function divide(a, b) {
     if (b === 0) {
         return "ERROR!"
     }
-    const solution = a / b;
+    const solution = roundToSixDecimals(a / b);
     restartOperation(solution);
     return solution;
 }
@@ -142,4 +142,8 @@ function print(...number) {
     if (number) {
         display.innerText = number;
     }
+}
+
+function roundToSixDecimals(number) {
+    return Math.round(number * 1000000) / 1000000;
 }
