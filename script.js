@@ -36,19 +36,22 @@ function buttonListener(e) {
             }
             num2 = num2.substring(0, num2.length - 1);
             print(num2)
-        } else {
-            if (num1.length > 0) {
-                if (num1[num1.length - 1] == '.') {
-                    document.getElementById("decimal-btn").disabled = false
-                }
-                num1 = num1.substring(0, num1.length - 1)
-                print(num1)
+        } else if (num1.length > 0) {
+            if (num1[num1.length - 1] == '.') {
+                document.getElementById("decimal-btn").disabled = false
             }
+            num1 = num1.substring(0, num1.length - 1)
+            print(num1)
+        }
+
+        if (num1 == "") {
+            num1 = 0;
+            print(num1)
         }
         return;
     }
 
-    if (buttonValue === '.') { // decimals
+    if (buttonValue == '.') { // decimals
         if (isNum1Complete) {
             if (num2 == 0) {
                 num2 = '0.'
@@ -60,7 +63,7 @@ function buttonListener(e) {
             num1 += '.'
             print(num1)
         }
-        e.target.disabled = true
+        document.getElementById("decimal-btn").disabled = true
         return
     }
 
@@ -138,6 +141,7 @@ function clear() {
     operator = undefined;
     isNum1Complete = false;
     isRestart = false
+    document.getElementById("decimal-btn").disabled = false;
     print(num1);
 }
 
@@ -183,14 +187,10 @@ function divide(a, b) {
 // -----------------------------------------------------------------------------
 
 function print(...number) {
-    console.log(num1, operator, num2)
-    if (number == 0) {
-        display.innerText = 0
-        return
-    }
+    // console.log(num1, operator, num2)
     if (number) {
         const str = number.toString()
-        display.innerText = str.replace(/^0+(?!.)/, '');
+        display.innerText = str.replace(/^0+(?!.)/, '0');
     }
 }
 
