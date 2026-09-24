@@ -23,6 +23,26 @@ function buttonListener(e) {
         return;
     }
 
+    if (buttonValue === "back-arrow") { // delete last char
+        
+        if (isNum1Complete && num2.length > 0) {
+            if (num2[num2.length - 1] == '.') {
+                document.getElementById("decimal-btn").disabled = false
+            }
+            num2 = num2.substring(0, num2.length - 1);
+            print(num2)
+        } else {
+            if (num1.length > 0) {
+                if (num1[num1.length - 1] == '.') {
+                    document.getElementById("decimal-btn").disabled = false
+                }
+                num1 = num1.substring(0, num1.length - 1)
+                print(num1)
+            }
+        }
+        return;
+    }
+
     if (buttonValue === '.') { // decimals
         if (isNum1Complete) {
             if (num2 == 0) {
@@ -157,8 +177,13 @@ function divide(a, b) {
 
 function print(...number) {
     console.log(num1, operator, num2)
+    if (number == 0) {
+        display.innerText = 0
+        return
+    }
     if (number) {
-        display.innerText = number;
+        const str = number.toString()
+        display.innerText = str.replace(/^0+(?!.)/, '');
     }
 }
 
