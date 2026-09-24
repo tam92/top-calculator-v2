@@ -23,6 +23,22 @@ function buttonListener(e) {
         return;
     }
 
+    if (buttonValue === '.') { // decimals
+        if (isNum1Complete) {
+            if (num2 == 0) {
+                num2 = '0.'
+            } else {
+                num2 += '.'
+            }
+            print(num2)
+        } else {
+            num1 += '.'
+            print(num1)
+        }
+        e.target.disabled = true
+        return
+    }
+
     if (!isNaN(parseInt(buttonValue))) { // numbers
         if (isRestart) {
             isRestart = false;
@@ -50,6 +66,7 @@ function buttonListener(e) {
             return
         }
     } else { // symbols + - x / = % .
+        document.getElementById("decimal-btn").disabled = false;
         if (buttonValue === "=") {
             if (num2 == "") {
                 return;
@@ -98,6 +115,7 @@ function clear() {
 }
 
 function restartOperation(solution) {
+    document.getElementById("decimal-btn").disabled = false;
     num1 = solution;
     num2 = "";
     isNum1Complete = true;
